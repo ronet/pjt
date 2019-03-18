@@ -1,13 +1,16 @@
 const express = require('express'),
     bodyParser = require('body-parser'),
-    cluster = require('cluster');
+    cluster = require('cluster'),
+    serverUtils = require('./server-utils')
+    ;
 numCPUs = require('os').cpus().length;
 
 if (cluster.isMaster) {
     console.log(`Master ${process.pid} is running`);
 
     let i;
-    for (i = 0; i < numCPUs; i++) {
+    // for (i = 0; i < numCPUs; i++) {
+    for (i = 0; i < 1; i++) {
         cluster.fork();
     }
 } else {
@@ -17,9 +20,11 @@ if (cluster.isMaster) {
     app.set('view engine', 'ejs');
 
     //middleware
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded());
 
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+
+    serverUtils.router(app, __dirname + '/routes');
 
     app.listen(80, () => {
         console.log('ptj is running');

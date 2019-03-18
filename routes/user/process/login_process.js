@@ -1,6 +1,6 @@
 exports.info = {
-    method: 'get',
-    url: '/'
+    method: 'post',
+    url: '/login_process'
 }
 
 exports.run = (req, res, next) => {

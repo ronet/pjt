@@ -1,8 +1,8 @@
 exports.info = {
     method: 'get',
-    url: '/'
+    url: '/login'
 }
 
 exports.run = (req, res, next) => {
-    res.render('index');
+    res.render('login');
 }

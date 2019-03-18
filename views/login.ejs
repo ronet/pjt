@@ -11,11 +11,11 @@
 </head>
 
 <body>
-    <h1>
-        Main Page
-    </h1>
-    <a href="/login">login</a>
-    <button type="submit" action="login" method="GET">login</button>
+    <form action="login_process" method="POST">
+        <input type="email" id="email" name="email" placeholder="email">
+        <input type="password" id="pwd" name="pwd" placeholder="password">
+        <input type="submit" value="login">
+    </form>
 </body>
 
 </html>
