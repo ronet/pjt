@@ -5,19 +5,18 @@ module.exports = (app) => {
   // GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
   const userSchema = app.get('mongoose').user;
-  // userSchema.findOne
 
   app.use(passport.initialize());
   app.use(passport.session());
 
   passport.serializeUser((user, done) => {
-    console.log('시리얼 : ', user);
+    console.log('serializeUser : ', user);
     done(null, user.email);
   });
 
   passport.deserializeUser((id, done) => {
     userSchema.findById(id, (err, user) => {
-      console.log('디시리얼 : ', user);
+      console.log('deserializeUser : ', user);
       done(err, user);
     });
   });

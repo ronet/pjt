@@ -3,7 +3,8 @@ const express = require('express'),
     cluster = require('cluster'),
     session = require('express-session'),
     serverUtils = require('./server-utils'),
-    numCPUs = require('os').cpus().length;
+    numCPUs = require('os').cpus().length,
+     FileStore = require('session-file-store')(session);
 
 if (cluster.isMaster) {
     console.log(`Master ${process.pid} is running`);
@@ -31,9 +32,10 @@ if (cluster.isMaster) {
         secret: 'test',
         resave: false,
         saveUninitialized: true,
-        cookie: {
-            maxAge: 1000 * 60 * 60 * 24 * 2 //2일
-        }
+        // cookie: {
+        //     maxAge: 1000 * 60 * 60 * 24 * 2 //2일
+        // },
+        FileStore: new FileStore()
     }));
 
     serverUtils.mongoose(app);

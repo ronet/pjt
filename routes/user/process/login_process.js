@@ -3,16 +3,18 @@ exports.info = {
     url: '/login_process'
 }
 
-exports.run = (req, res, next) => {
+exports.run = async (req, res, next) => {
     // const mongo = req.app.get('mongo');
     // console.log(mongo['user']);
     const passport = req.app.get('passport');
-    console.log('프로세스에서 패스포트 : ',passport);
+    console.log('PASSPORT IN LOGIN_PROCESS : ',passport);
+    console.log('CHECK POINT 1 : ', req.session);
 
-    passport.authenticate('local', {
+    await passport.authenticate('local', {
         successRedirect: '/',
         failureRedirect: '/login',
         failureFlash: true
     });
+    console.log('CHECK POINT 2 : ', req.session);
     // res.redirect('/');
 }
