@@ -1,5 +1,6 @@
 module.exports = {
-    db: require('./db'),
+    mongoose: require('./mongoose'),
     io: require('./io'),
-    router: require('./router')
+    router: require('./router'),
+    passport: require('./passport')
 }

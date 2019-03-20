@@ -4,5 +4,15 @@ exports.info = {
 }
 
 exports.run = (req, res, next) => {
-    res.render('index');
+    // const mongo = req.app.get('mongo');
+    // console.log(mongo['user']);
+    const passport = req.app.get('passport');
+
+    console.log(passport);
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true
+    })
+    // res.redirect('/');
 }
