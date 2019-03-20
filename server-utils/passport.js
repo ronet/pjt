@@ -21,6 +21,19 @@ module.exports = async (app) => {
     localStrategy = require('passport-local').Strategy,
     GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
+  app.use(passport.initialize());
+  app.use(passport.session());
+  
+  passport.serializeUser(function(user, done) {
+    done(null, user.email);
+  });
+  
+  passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+      done(err, user);
+    });
+  });
+
   await passport.use(new localStrategy({
     usernameField: 'email',
     passwordField: 'pw'
@@ -37,5 +50,5 @@ module.exports = async (app) => {
     });
   }
   ))
-  app.set('passport', passport);
+  return app.set('passport', passport);
 }
