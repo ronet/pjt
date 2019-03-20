@@ -27,11 +27,12 @@ if (cluster.isMaster) {
     app.use(session({
         // secure: true,//https에서만 사용하겠다
         // httponly: true,//세션쿠키를 사용할수 없게 한다
-        secret: '&JJ<A123NPKMUUID%4487$#AWE3#',
+        // secret: '&JJ<A123NPKMUUID%4487$#AWE3#',
+        secret: 'test',
         resave: false,
         saveUninitialized: true,
         cookie: {
-            maxAge: 1000 //1초
+            maxAge: 1000 * 60 * 60 * 24 * 2 //2일
         }
     }));
 
